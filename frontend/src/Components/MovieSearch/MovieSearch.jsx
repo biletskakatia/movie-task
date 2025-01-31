@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { changeFilter } from '../../Redux/filterSlice.js';
+import css from './MovieSearch.module.css';
 
 const MovieSearch = () => {
     const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const MovieSearch = () => {
     };
 
     return (
-        <input type="text" placeholder='Search movies...' onChange={handleSearch} />
+        <input type="text" placeholder='Search movies...' onChange={handleSearch} className={css.searchInput} />
     );
 };
 

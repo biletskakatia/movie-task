@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addMovie } from '../../Redux/moviesOps';
+import css from './AddMovieForm.module.css';
 
 
 const AddMovieForm = () => {
@@ -57,20 +58,20 @@ const AddMovieForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <select value={genre} onChange={(e) => setGenre(e.target.value)} required>
+        <form onSubmit={handleSubmit} className={css.form}>
+            {error && <p className={css.error}>{error}</p>}
+            <input type="text"  className={css.input} placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <select value={genre} className={css.select} onChange={(e) => setGenre(e.target.value)} required>
                 <option value="">Select Genre</option>
                 {validGenres.map((g) => (
                     <option key={g} value={g}>{g}</option>
                 ))}
             </select>
 
-            <input type="number" placeholder="Rating (0-10)" value={rating} onChange={(e) => setRating(e.target.value)}  min="0" max="10" />
-            <input type="date" value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} required />
-            <input type="text" placeholder="Image URL (optional)" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
-            <button type='submit'>Add Movie</button>
+            <input type="number" className={css.input} placeholder="Rating (0-10)" value={rating} onChange={(e) => setRating(e.target.value)}  min="0" max="10" />
+            <input type="date"className={css.input}  value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} required />
+            <input type="text" className={css.input} placeholder="Image URL (optional)" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
+            <button type='submit' className={css.button} >Add Movie</button>
         </form>
     );
 };

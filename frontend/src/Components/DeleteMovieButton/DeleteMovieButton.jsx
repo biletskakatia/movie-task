@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { deleteMovie } from '../../Redux/moviesOps';
-
+import css from "./DeleteMovieButton.module.css";
 const DeleteMovieButton = ({ movieId, movieTitle }) => {
     const dispatch = useDispatch();
     
@@ -13,7 +13,7 @@ const DeleteMovieButton = ({ movieId, movieTitle }) => {
 
     };
     return (
-        <button type='button' onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>Delete</button>
+        <button type='button' onClick={handleDelete} className={css.deleteButton}>Delete</button>
     );
 };
 

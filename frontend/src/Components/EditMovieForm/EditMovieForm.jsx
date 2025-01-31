@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateMovie } from '../../Redux/moviesOps.js';
 import { fetchMovies } from '../../Redux/moviesOps.js';
-import styles from './EditMovieForm.module.css'; 
+import css from './EditMovieForm.module.css'; 
 
 const EditMovieForm = ({ movie, onClose }) => {
     const dispatch = useDispatch();
@@ -16,10 +16,14 @@ const EditMovieForm = ({ movie, onClose }) => {
 
     const validGenres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance'];
 
+    const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+        onClose(); 
+    }
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        console.log("Movie object in EditMovieForm:", movie);
 
         if (!title.trim()) {
             setError('Title is required.');
@@ -51,7 +55,6 @@ const EditMovieForm = ({ movie, onClose }) => {
         }
 
         await dispatch(updateMovie({ movieId: movie._id, updatedMovie })).unwrap();
-            console.log("Movie updated successfully:", updatedMovie);
         await dispatch(fetchMovies());    
         onClose();
     } catch (error) {
@@ -59,15 +62,14 @@ const EditMovieForm = ({ movie, onClose }) => {
         setError("Failed to update movie. Try again.");
     }
     };
-
     return (
-        <div className={styles.modal}>
-            <div className={styles.modalContent}>
+        <div className={css.modal} onClick={handleBackdropClick}>
+            <div className={css.modalContent}>
                 <h2>Edit Movie</h2>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <form onSubmit={handleSubmit} className={styles.form}>
+                <form onSubmit={handleSubmit} className={css.form}>
                     <input 
-                        className={styles.input} 
+                        className={css.input} 
                         type="text" 
                         placeholder="Title" 
                         value={title} 
@@ -75,7 +77,7 @@ const EditMovieForm = ({ movie, onClose }) => {
                         required 
                     />
                     <select 
-                        className={styles.input} 
+                        className={css.input} 
                         value={genre} 
                         onChange={(e) => setGenre(e.target.value)} 
                         required
@@ -86,7 +88,7 @@ const EditMovieForm = ({ movie, onClose }) => {
                         ))}
                     </select>
                     <input 
-                        className={styles.input} 
+                        className={css.input} 
                         type="number" 
                         placeholder="Rating (0-10)" 
                         value={rating} 
@@ -96,27 +98,27 @@ const EditMovieForm = ({ movie, onClose }) => {
                         required 
                     />
                     <input 
-                        className={styles.input} 
+                        className={css.input} 
                         type="date" 
                         value={releaseDate.split('T')[0]} 
                         onChange={(e) => setReleaseDate(e.target.value)} 
                         required 
                     />
                     <input 
-                        className={styles.input} 
+                        className={css.input} 
                         type="text" 
                         placeholder="Image URL (optional)" 
                         value={imageUrl} 
                         onChange={(e) => setImageUrl(e.target.value)} 
                     />
                     <button 
-                        className={`${styles.button} ${styles.saveButton}`} 
+                        className={`${css.button} ${css.saveButton}`} 
                         type="submit"
                     >
                         Save Changes
                     </button>
                     <button 
-                        className={`${styles.button} ${styles.cancelButton}`} 
+                        className={`${css.button} ${css.cancelButton}`} 
                         type="button" 
                         onClick={onClose}
                     >

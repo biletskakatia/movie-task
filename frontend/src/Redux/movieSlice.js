@@ -59,11 +59,10 @@ const movieSlice = createSlice({
                 console.log("Payload in fulfilled:", action.payload);
                 state.isLoading = false;
                 state.items = state.items.map((movie) =>
-                movie._id === action.payload._id
-                ? { ...movie, ...action.payload }
-                : movie
-                );
-    console.log("Updated items after map:", state.items);
+            movie._id === action.payload?.movieId 
+            ? { ...movie, ...action.payload.updatedMovie }
+            : movie
+            );
 })
             .addCase(updateMovie.rejected, (state, action) => {
                 state.isLoading = false;
@@ -94,7 +93,6 @@ export default movieSlice.reducer;
 export const selectFilteredMovies = createSelector(
     [selectMovie, selectNameFilter], (movies, namefilter) => {
         if (!Array.isArray(movies)) return [];
-        console.log('Filtered Movies Selector:', movies);
         return movies.filter(movie => movie.title?.toLowerCase().includes((namefilter || "").toLowerCase()));
 }
 )

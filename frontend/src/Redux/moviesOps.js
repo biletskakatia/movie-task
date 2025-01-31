@@ -42,11 +42,9 @@ export const addMovie = createAsyncThunk(
 
 export const updateMovie = createAsyncThunk(
     'movies/updateMovie',
-    async ({movieId, patchData}, thunkAPI) => {
+    async ({movieId, updatedMovie}, thunkAPI) => {
         try {
-            console.log(`Updating movie at URL: /movies/${movieId}`, patchData);
-            const response = await axios.patch(`/movies/${movieId}`, patchData);
-            console.log("Response from server:", response.data);
+            const response = await axios.patch(`/movies/${movieId}`, updatedMovie);
             return response.data.data;
             
         } catch (error) {

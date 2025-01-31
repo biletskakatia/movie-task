@@ -1,0 +1,33 @@
+.favoriteButton {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.favoriteButton:hover {
+    background-color: #f7f9fc;
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.favoriteButton.active {
+    background-color: #ffeaa7;
+    color: #d35400;
+    border-color: #d35400;
+}
+@media screen and (min-width: 768px) {
+    .favoriteButton {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .favoriteButton {
+        padding: 12px 18px;
+    }
+}
