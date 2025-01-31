@@ -5,13 +5,13 @@ export const getMoviesService = async () => {
     return movies;
 };
 
-export const findMovieById = async (movieId) => {
+export const findMovieByIdService = async (movieId) => {
     return Movies.findById(movieId);
 };
 
-export const createMovie = payload => Movies.create(payload);
+export const createMovieService = payload => Movies.create(payload);
 
-export const updateMovie = async (filter, data, options = {}) => {
+export const updateMovieService = async (filter, data, options = {}) => {
     const updateMovie = await Movies.findOneAndUpdate(filter, data, {
         new: true,
         ...options,
@@ -20,7 +20,7 @@ export const updateMovie = async (filter, data, options = {}) => {
     if (!updateMovie) return null;
     return {
         data: updateMovie,
-        isNew: Boolean(options.upserted)
+        isNew: Boolean(options.upsert)
     };
 };
 export const deleteMovieServices = filter => Movies.findByIdAndDelete(filter);
