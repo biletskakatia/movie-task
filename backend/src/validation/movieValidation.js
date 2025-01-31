@@ -2,9 +2,9 @@ import Joi from 'joi';
 
 export const addMovieSchema = Joi.object({
     title: Joi.string().required(),
-    description: Joi.string().required(),
-    actors: Joi.string().required(),
-    director: Joi.string().required(),
+    description: Joi.string().optional(),
+    actors: Joi.string().optional(),
+    director: Joi.string().optional(),
     genre: Joi.string().valid('Action', 'Comedy', 'Drama', 'Horror', 'Romance').required(),
     rating: Joi.number().min(0).max(10).optional(),
     releaseDate: Joi.date().iso().required() ,

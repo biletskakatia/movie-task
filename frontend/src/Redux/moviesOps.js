@@ -7,6 +7,7 @@ export const fetchMovies = createAsyncThunk(
     'movies/fetchAll',
     async (_, thunkAPI) => {
         try {
+            
             const response = await axios.get('/movies');
     return response.data.data; 
         } catch (error) {
@@ -31,7 +32,12 @@ export const addMovie = createAsyncThunk(
     'movies/addMovie',
     async (newMovie, thunkAPI) => {
         try {
-            const response = await axios.post('/movies',newMovie);
+            console.log("Sending data to API:", newMovie);
+            const response = await axios.post('/movies', newMovie, {
+                headers: {
+                    'Content-Type': 'application/json', 
+                },
+            });
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

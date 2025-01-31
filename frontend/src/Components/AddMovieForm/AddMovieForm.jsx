@@ -10,29 +10,27 @@ const AddMovieForm = () => {
     const [genre, setGenre] = useState('');
     const [rating, setRating] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
-    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('genre', genre);
-        formData.append('rating', rating);
-        formData.append('releaseDate', releaseDate);
-        formData.append('image', image);
+
+        const movieData = {
+            title,
+            genre,
+            rating: Number(rating),
+            releaseDate,
+            image: imageUrl || null,
+        };
+        console.log("Movie Data:", movieData);
         
-        dispatch(addMovie(formData));
+        dispatch(addMovie(movieData));
         
         setTitle('');
         setGenre('');
         setRating('');
         setReleaseDate('');
-        setImage(null);
-    };
-
-    const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+        setImageUrl('');
     };
 
     return (
@@ -41,7 +39,7 @@ const AddMovieForm = () => {
             <input type="text" placeholder="Genre" value={genre} onChange={(e) => setGenre(e.target.value)} required />
             <input type="number" placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} required />
             <input type="date" placeholder="Release Date" value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} required />
-            <input type="file" accept="image/*"  onChange={handleImageChange}  />
+            <input type="text" placeholder="Image URL (optional)" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
             <button type='submit'>Add Movie</button>
         </form>
     );

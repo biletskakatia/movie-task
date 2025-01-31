@@ -8,15 +8,13 @@ const movieSchema = new Schema(
         },
         description: {
             type: String,
-            require: true
         },
         actors: {
             type: String,
-            require: true
         },
         director: {
             type: String,
-            require: true
+
         },
         genre: {
             type: String,

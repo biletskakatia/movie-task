@@ -20,12 +20,12 @@ const MovieDetailsPage = () => {
 
     return (
         <div>
-            <h1>{movie.title}</h1>
-            <p>description:{movie.description}</p>
-            <p>Genre: {movie.genre}</p>
-            <p>Rating: {movie.rating}</p>
-            <p>Release Date: {movie.releaseDate}</p>
-            <p>director: {movie.director}</p>
+            <h1>{movie.data.title}</h1>
+            <p>description:{movie.data.description}</p>
+            <p>Genre: {movie.data.genre}</p>
+            <p>Rating: {movie.data.rating}</p>
+            <p>Release Date: {movie.data.releaseDate}</p>
+            <p>director: {movie.data.director}</p>
     </div>
 );
 };
