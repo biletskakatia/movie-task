@@ -56,12 +56,15 @@ const movieSlice = createSlice({
                 state.error = null;
             })
             .addCase(updateMovie.fulfilled, (state, action) => {
+                console.log("Payload in fulfilled:", action.payload);
                 state.isLoading = false;
-                const idx = state.items.findIndex((movie) => movie._id === action.payload._id);
-                if (idx !== -1) {
-                    state.items[idx] = action.payload;
-                }
-            })
+                state.items = state.items.map((movie) =>
+                movie._id === action.payload._id
+                ? { ...movie, ...action.payload }
+                : movie
+                );
+    console.log("Updated items after map:", state.items);
+})
             .addCase(updateMovie.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
@@ -69,10 +72,11 @@ const movieSlice = createSlice({
             .addCase(deleteMovie.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
+                
             })
             .addCase(deleteMovie.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.items = state.items.filter((movie) => movie._id !== action.payload._id);
+                state.items = state.items.filter(movie => movie._id !== action.payload.id);
             })
             .addCase(deleteMovie.rejected, (state, action) => {
                 state.isLoading = false;
@@ -90,7 +94,7 @@ export default movieSlice.reducer;
 export const selectFilteredMovies = createSelector(
     [selectMovie, selectNameFilter], (movies, namefilter) => {
         if (!Array.isArray(movies)) return [];
-        console.log('Movies:', movies);
-        return movies.filter(movie => movie.title.toLowerCase().includes(namefilter.toLowerCase()));
+        console.log('Filtered Movies Selector:', movies);
+        return movies.filter(movie => movie.title?.toLowerCase().includes((namefilter || "").toLowerCase()));
 }
 )

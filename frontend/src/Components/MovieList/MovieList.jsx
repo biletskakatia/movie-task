@@ -8,6 +8,7 @@ const MovieList = () => {
     const dispatch = useDispatch();
 
     const movies = useSelector(selectFilteredMovies);
+    console.log("Movies in MovieList:", movies);
     const isLoading = useSelector(selectLoading);
     const error = useSelector(selectError);
     

@@ -1,14 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { deleteMovie } from '../../Redux/moviesOps';
 
-const DeleteMovieButton = ({ movieId }) => {
+const DeleteMovieButton = ({ movieId, movieTitle }) => {
     const dispatch = useDispatch();
     
-    const handleDelete = () => {
-        dispatch(deleteMovie(movieId));
+    const handleDelete = (e) => {
+        e.preventDefault();
+        
+        if (window.confirm(`Are you sure you want to delete "${movieTitle}"?`)) {
+            dispatch(deleteMovie(movieId)); 
+        }
+
     };
     return (
-        <button onClick={handleDelete}>Delete</button>
+        <button type='button' onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>Delete</button>
     );
 };
 

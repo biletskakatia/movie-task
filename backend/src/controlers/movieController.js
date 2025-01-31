@@ -54,5 +54,9 @@ export const deleteMovieController = async (req, res) => {
     if (!data) {
         throw createHttpError(404, "Movie not found");
     }
-    res.status(204).send();
+    res.status(200).json({
+        status: 200,
+        message: "Successfully deleted movie!",
+        id: movieId,
+    });
 };

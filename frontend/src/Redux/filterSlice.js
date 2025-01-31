@@ -6,7 +6,7 @@ const filterSlice = createSlice({
     },
     reducers: {
         changeFilter(state, action) {
-            state.title = action.payload;
+            state.title = action.payload|| "";
         }
     }
 });
